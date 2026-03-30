@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api'
+  baseURL: 'https://eliphas-com.onrender.com/api'  // 👈 replace with your Render URL
 })
 
 API.interceptors.request.use((req) => {
