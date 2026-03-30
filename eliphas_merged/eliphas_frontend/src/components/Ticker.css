@@ -1,0 +1,12 @@
+/* ===== TICKER ===== */
+.ticker{background:var(--navy);padding:.8rem 0;overflow:hidden;border-top:1px solid rgba(255,255,255,.06);transform-style:preserve-3d}
+.ticker-t{display:flex;white-space:nowrap;animation:tk 30s linear infinite}
+@keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ti{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:0 2.5rem;display:inline-flex;align-items:center;gap:2rem;font-weight:500;transition:transform .3s,color .3s;transform-style:preserve-3d}
+.ti::after{content:'·';color:rgba(255,255,255,.25);font-size:.5rem}
+.ti:hover{transform:translateZ(8px) scale(1.06);color:rgba(255,255,255,.9)}
+/* ===== WHITE THEME REFRESH ===== */
+.ticker{background:#fff;border-top:1px solid rgba(13,37,85,.06);border-bottom:1px solid rgba(13,37,85,.06);box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
+.ti{color:rgba(13,37,85,.45)}
+.ti::after{color:rgba(13,37,85,.2)}
+.ti:hover{color:var(--navy)}

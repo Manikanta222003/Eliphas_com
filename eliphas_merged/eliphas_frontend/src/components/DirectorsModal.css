@@ -1,0 +1,562 @@
+/* ===== DIRECTORS MODAL ===== */
+.dir-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s cubic-bezier(.4, 0, .2, 1)
+}
+
+.dir-modal.open {
+    opacity: 1;
+    pointer-events: all
+}
+
+.dir-modal-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: opacity .4s
+}
+
+.dir-modal-box {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(160deg, #0d2555 0%, #0d2555 55%, #091d45 100%);
+    border: 1px solid rgba(232, 160, 48, .2);
+    border-radius: 20px;
+    padding: 3rem 3rem 2.5rem;
+    width: 100%;
+    max-width: 860px;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: perspective(1200px) translateY(40px) rotateX(4deg) scale(.96);
+    transition: transform .5s cubic-bezier(.4, 0, .2, 1), opacity .4s;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, .7), 0 0 0 1px rgba(232, 160, 48, .15)
+}
+
+.dir-modal.open .dir-modal-box {
+    transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1)
+}
+
+.dir-modal-box::-webkit-scrollbar {
+    width: 3px
+}
+
+.dir-modal-box::-webkit-scrollbar-track {
+    background: transparent
+}
+
+.dir-modal-box::-webkit-scrollbar-thumb {
+    background: rgba(232, 160, 48, .4);
+    border-radius: 2px
+}
+
+.dir-modal-close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .1);
+    color: rgba(255, 255, 255, .5);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s;
+    z-index: 2
+}
+
+.dir-modal-close svg {
+    width: 16px;
+    height: 16px
+}
+
+.dir-modal-close:hover {
+    background: rgba(232, 160, 48, .2);
+    border-color: var(--teal);
+    color: var(--white)
+}
+
+.dir-modal-hdr {
+    text-align: center;
+    margin-bottom: 2.8rem
+}
+
+.dir-modal-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: .6rem;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: .8rem;
+    font-weight: 600
+}
+
+.dir-tag-line {
+    width: 20px;
+    height: 1.5px;
+    background: var(--teal-light)
+}
+
+.dir-modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--white);
+    font-weight: 700;
+    line-height: 1.1
+}
+
+.dir-modal-title em {
+    font-style: italic;
+    color: rgba(255, 255, 255, .6)
+}
+
+.dir-modal-sub {
+    font-size: .85rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, .45);
+    line-height: 1.8;
+    max-width: 480px;
+    margin: .9rem auto 0
+}
+
+.dir-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.8rem;
+    margin-bottom: 2rem
+}
+
+@media(max-width:640px) {
+    .dir-cards {
+        grid-template-columns: 1fr
+    }
+}
+
+.dir-card {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform .5s cubic-bezier(.4, 0, .2, 1);
+    cursor: default
+}
+
+.dir-card:hover {
+    transform: perspective(800px) translateY(-8px) rotateX(-3deg) rotateY(2deg)
+}
+
+.dir-card-inner {
+    background: linear-gradient(150deg, rgba(255, 255, 255, .05) 0%, rgba(232, 160, 48, .07) 50%, rgba(255, 255, 255, .03) 100%);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color .4s, box-shadow .4s
+}
+
+.dir-card:hover .dir-card-inner {
+    border-color: rgba(232, 160, 48, .4);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .5), 0 0 0 1px rgba(232, 160, 48, .2), inset 0 1px 0 rgba(255, 255, 255, .08)
+}
+
+.dir-card-front {
+    padding: 2rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1
+}
+
+.dir-card-shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, .04) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform .6s ease;
+    pointer-events: none;
+    z-index: 0
+}
+
+.dir-card:hover .dir-card-shine {
+    transform: translateX(100%)
+}
+
+.dir-card-shadow {
+    position: absolute;
+    bottom: -12px;
+    left: 10%;
+    width: 80%;
+    height: 20px;
+    background: radial-gradient(ellipse at center, rgba(232, 160, 48, .3), transparent 70%);
+    filter: blur(6px);
+    transition: opacity .4s;
+    opacity: 0
+}
+
+.dir-card:hover .dir-card-shadow {
+    opacity: 1
+}
+
+.dir-photo-ring {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    flex-shrink: 0
+}
+
+.dir-photo-ring-anim {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: conic-gradient(var(--teal) 0%, var(--teal-light) 35%, transparent 50%, transparent 100%);
+    animation: ringRotate 4s linear infinite;
+    opacity: .7
+}
+
+@keyframes ringRotate {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.dir-card:hover .dir-photo-ring-anim {
+    animation-duration: 2s
+}
+
+.dir-photo-wrap {
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a458f, #0d2555);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, .08)
+}
+
+.dir-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+.dir-photo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .3rem;
+    color: rgba(255, 255, 255, .3)
+}
+
+.dir-photo-placeholder svg {
+    width: 36px;
+    height: 36px
+}
+
+.dir-photo-hint {
+    font-size: .52rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 500
+}
+
+.dir-card-info {
+    width: 100%;
+    text-align: center
+}
+
+.dir-name-badge {
+    display: inline-block;
+    font-size: .55rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    font-weight: 600;
+    background: rgba(232, 160, 48, .12);
+    border: 1px solid rgba(232, 160, 48, .25);
+    padding: .2rem .7rem;
+    border-radius: 3px;
+    margin-bottom: .7rem
+}
+
+.dir-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: .3rem;
+    line-height: 1.1;
+    transition: color .3s
+}
+
+.dir-card:hover .dir-name {
+    color: rgba(0, 0, 0, 0.95)
+}
+
+.dir-role {
+    font-size: .7rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .4);
+    font-weight: 500
+}
+
+.dir-divider {
+    width: 32px;
+    height: 1.5px;
+    background: linear-gradient(90deg, var(--teal), var(--teal-light));
+    margin: 1rem auto;
+    border-radius: 2px;
+    transition: width .4s
+}
+
+.dir-card:hover .dir-divider {
+    width: 60px
+}
+
+.dir-bio {
+    font-size: .8rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, .5);
+    margin-bottom: 1.2rem;
+    transition: color .3s
+}
+
+.dir-card:hover .dir-bio {
+    color:rgba(0, 0, 0, 0.95)
+}
+
+.dir-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    justify-content: center
+}
+
+.dir-tag {
+    font-size: .6rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: rgba(255, 255, 255, .5);
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .04);
+    padding: .2rem .65rem;
+    border-radius: 3px;
+    transition: all .3s
+}
+
+.dir-card:hover .dir-tag {
+    color: var(--teal-light);
+    border-color: rgba(232, 160, 48, .35);
+    background: rgba(232, 160, 48, .1)
+}
+
+.dir-modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, .06);
+    padding-top: 1.2rem;
+    text-align: center
+}
+
+.dir-footer-text {
+    font-size: .6rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .25);
+    font-weight: 500
+}
+
+@keyframes dCardIn {
+    from {
+        opacity: 0;
+        transform: perspective(800px) translateY(30px) rotateX(8deg) scale(.94)
+    }
+
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+.dir-modal.open .dir-card:nth-child(1) {
+    animation: dCardIn .55s .15s cubic-bezier(.4, 0, .2, 1) both
+}
+
+.dir-modal.open .dir-card:nth-child(2) {
+    animation: dCardIn .55s .28s cubic-bezier(.4, 0, .2, 1) both
+}
+
+@keyframes dHdrIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) perspective(600px) rotateX(6deg)
+    }
+
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+.dir-modal.open .dir-modal-hdr {
+    animation: dHdrIn .5s .05s ease both
+}
+
+@media(max-width:600px) {
+    .dir-modal-box {
+        padding: 2rem 1.5rem 2rem
+    }
+}
+
+/* ===== WHITE THEME REFRESH ===== */
+.dir-modal-bg {
+    background: rgba(13, 37, 85, .16);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px)
+}
+
+.dir-modal-box {
+    background: linear-gradient(180deg, #ffffff 0%, #f7f9fd 100%);
+    border: 1px solid rgba(13, 37, 85, .1);
+    box-shadow: 0 34px 90px rgba(13, 37, 85, .2)
+}
+
+.dir-modal-box::-webkit-scrollbar-thumb {
+    background: rgba(13, 37, 85, .28)
+}
+
+.dir-modal-close {
+    background: #ffffff;
+    border-color: rgba(13, 37, 85, .1);
+    color: var(--navy)
+}
+
+.dir-modal-close:hover {
+    background: var(--off-white);
+    color: var(--navy)
+}
+
+.dir-modal-title,
+.dir-name {
+    color: var(--navy)
+}
+
+.dir-modal-title em {
+    color: var(--teal)
+}
+
+.dir-modal-sub,
+.dir-bio {
+    color: var(--gray-600)
+}
+
+.dir-card-inner {
+    background: linear-gradient(180deg, #ffffff 0%, #f7f9fd 100%);
+    border: 1px solid rgba(13, 37, 85, .08)
+}
+
+.dir-card:hover .dir-card-inner {
+    box-shadow: 0 20px 60px rgba(13, 37, 85, .12), 0 0 0 1px rgba(232, 160, 48, .16)
+}
+
+.dir-card-shine {
+    background: linear-gradient(135deg, transparent 40%, rgba(13, 37, 85, .05) 50%, transparent 60%)
+}
+
+.dir-photo-wrap {
+    background: linear-gradient(135deg, #f4f7fd, #e8f0fb);
+    border-color: rgba(13, 37, 85, .08)
+}
+
+.dir-photo-placeholder {
+    color: rgba(13, 37, 85, .35)
+}
+
+.dir-role,
+.dir-footer-text {
+    color: var(--gray-400)
+}
+
+.dir-tag {
+    color: var(--gray-600);
+    border-color: rgba(13, 37, 85, .08);
+    background: rgba(13, 37, 85, .03)
+}
+
+.dir-card:hover .dir-tag {
+    color: var(--navy)
+}
+
+.dir-modal-footer {
+    border-top: 1px solid rgba(13, 37, 85, .08)
+}
+
+.dir-modal .dir-card {
+    background: none;
+    border: none;
+    box-shadow: none
+}
+
+.dir-modal .dir-card-inner {
+    background: linear-gradient(180deg, #ffffff 0%, #f7f9fd 100%);
+    border: 1px solid rgba(13, 37, 85, .08)
+}
+
+.dir-modal .dir-card:hover .dir-card-inner {
+    box-shadow: 0 20px 60px rgba(13, 37, 85, .12), 0 0 0 1px rgba(232, 160, 48, .16)
+}
+
+.dir-modal .dir-photo-wrap {
+    background: linear-gradient(135deg, #f4f7fd, #e8f0fb);
+    border-color: rgba(13, 37, 85, .08)
+}
+
+.dir-modal .dir-name {
+    color: var(--navy)
+}
+
+.dir-modal .dir-role,
+.dir-modal .dir-footer-text {
+    color: var(--gray-400)
+}
+
+.dir-modal .dir-bio {
+    color: var(--gray-600)
+}
+
+.dir-modal .dir-tag {
+    color: var(--gray-600);
+    border-color: rgba(13, 37, 85, .08);
+    background: rgba(13, 37, 85, .03)
+}
+
+.dir-modal .dir-card:hover .dir-tag {
+    color: var(--navy)
+}
+
+.dir-modal .dir-card:hover .dir-name {
+    color: var(--navy)
+}
+
+.dir-modal .dir-card:hover .dir-bio {
+    color: var(--gray-600)
+}

@@ -1,0 +1,27 @@
+/* ===== FOOTER ===== */
+footer{background:#091d45;border-top:1px solid rgba(255,255,255,.06)}
+.ft-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding:5rem 5rem 4rem;border-bottom:1px solid rgba(255,255,255,.05)}
+.fb .fn{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--white);margin-bottom:.3rem;font-weight:700}
+.fb .fs{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.5rem;font-weight:500}
+.fb p{font-size:.82rem;font-weight:300;color:rgba(255,255,255,.35);line-height:1.85}
+.fc{transform-style:preserve-3d;transition:transform .4s}
+.fc:hover{transform:perspective(600px) rotateX(-2deg) translateZ(6px)}
+.fc h5{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.5rem;font-weight:600}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.fc ul a{font-size:.82rem;color:rgba(255,255,255,.35);text-decoration:none;transition:color .3s,transform .3s,letter-spacing .3s;display:inline-block}
+.fc ul a:hover{color:var(--white);transform:translateX(6px) translateZ(4px);letter-spacing:.18em}
+.ft-btm{display:flex;justify-content:space-between;align-items:center;padding:1.8rem 5rem;font-size:.72rem;color:rgba(255,255,255,.3)}
+.ft-btm strong{color:rgba(255,255,255,.55)}
+.footer-logo{height:60px;width:auto;object-fit:contain;transition:transform .4s,filter .4s;filter:drop-shadow(0 4px 20px rgba(232,160,48,.2))}
+.footer-logo-wrap{display:inline-block;position:relative}
+.footer-logo-wrap::after{content:'';position:absolute;bottom:-8px;left:10%;width:80%;height:12px;background:radial-gradient(ellipse at center,rgba(232,160,48,.3) 0%,transparent 70%);border-radius:50%;filter:blur(4px);animation:ftLogoGlow 3s ease-in-out infinite}
+@keyframes ftLogoGlow{0%,100%{opacity:.4;transform:scaleX(.8)}50%{opacity:.9;transform:scaleX(1.1)}}
+.footer-logo-wrap:hover .footer-logo{transform:translateY(-4px) scale(1.04);filter:drop-shadow(0 8px 28px rgba(232,160,48,.4))}
+/* ===== WHITE THEME REFRESH ===== */
+footer{background:#ffffff;border-top:1px solid rgba(13,37,85,.08)}
+.ft-top{border-bottom:1px solid rgba(13,37,85,.06)}
+.fb .fn{color:var(--navy)}
+.fb .fs,.fc h5{color:var(--gray-400)}
+.fb p,.fc ul a,.ft-btm{color:var(--gray-600)}
+.fc ul a:hover{color:var(--navy)}
+.ft-btm strong{color:var(--navy)}
