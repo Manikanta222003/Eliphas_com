@@ -828,3 +828,4 @@ export const exportCustomCompanyPdf  = async (req, res) => {
     generateCompanyFarePdf(res, d, reportTitle("custom", from, to), `company_fare_custom_${from}_to_${to}.pdf`);
   } catch (error) { res.status(500).json({ message: error.message }); }
 };
+ 
