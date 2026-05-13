@@ -70,12 +70,14 @@ export const searchBilling = async (req, res) => {
     const {
       financialYear, companyLocation,
       vehicleNumber, challanNumber,
-      date, fromLocation, toLocation, loadType
+      date, fromLocation, toLocation, loadType,
+      clientName, remarks
     } = req.query;
 
     if (!financialYear || !companyLocation)
       return res.status(400).json({ message: "financialYear and companyLocation are required" });
 
+    // Support sub-city matching: "Visakhapatnam > Gajuwaka" stored as exact string
     const filter = { financialYear, companyLocation };
 
     if (vehicleNumber) filter.vehicleNumber = { $regex: vehicleNumber, $options: "i" };
@@ -83,6 +85,8 @@ export const searchBilling = async (req, res) => {
     if (fromLocation)  filter.fromLocation  = { $regex: fromLocation,  $options: "i" };
     if (toLocation)    filter.toLocation    = { $regex: toLocation,    $options: "i" };
     if (loadType)      filter.loadType      = { $regex: loadType,      $options: "i" };
+    if (clientName)    filter.clientName    = { $regex: clientName,    $options: "i" };
+    if (remarks)       filter.remarks       = { $regex: remarks,       $options: "i" };
 
     if (date) {
       const start = new Date(date); start.setHours(0, 0, 0, 0);
